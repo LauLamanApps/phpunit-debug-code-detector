@@ -1,8 +1,8 @@
 <?php
 
-namespace LauLamanApps\PhpunitDebugCodeDetector\Detector\Php;
+namespace LauLamanApps\DebugCodeDetector\Detector\Php;
 
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\AbstractDetector;
+use LauLamanApps\DebugCodeDetector\Detector\AbstractDetector;
 
 class VarDumpDetector extends AbstractDetector
 {

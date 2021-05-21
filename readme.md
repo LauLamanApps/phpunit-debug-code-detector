@@ -15,7 +15,7 @@ $ composer require --dev laulamanapps/phpunit-debug-code-detector
 Configure:
 ```xml
 <extensions>
-    <extension class="LauLamanApps\PhpunitDebugCodeDetector\PhpunitDebugCodeDetectorExtension">
+    <extension class="LauLamanApps\DebugCodeDetector\DebugCodeDetectorExtension">
         <arguments>
             <array><!-- Folders we want scanned -->
                 <element key="0"><string>src</string></element>
@@ -30,16 +30,16 @@ Configure:
 Enable only some detectors:
 ```xml
 <extensions>
-    <extension class="LauLamanApps\PhpunitDebugCodeDetector\PhpunitDebugCodeDetectorExtension">
+    <extension class="LauLamanApps\DebugCodeDetector\DebugCodeDetectorExtension">
         <arguments>
             <array><!-- Folders we want scanned -->
                 <element key="0"><string>src</string></element>
                 <element key="1"><string>templates</string></element>
             </array>
             <array><!-- Detectors we want to use -->
-                <element key="0"><string>LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\VarDumpDetector</string></element>
-                <element key="1"><string>LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\PrintRDetector</string></element>
-                <element key="2"><string>LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper\DumpDetector</string></element>
+                <element key="0"><object class="LauLamanApps\DebugCodeDetector\Detector\Php\VarDumpDetector"/></element>
+                <element key="1"><object class="LauLamanApps\DebugCodeDetector\Detector\Php\PrintRDetector"/></element>
+                <element key="2"><object class="LauLamanApps\DebugCodeDetector\Detector\Symfony\VarDumper\DumpDetector"/></element>
             </array>
         </arguments>
     </extension>
@@ -49,7 +49,7 @@ Enable only some detectors:
 Disable colorful output:
 ```xml
 <extensions>
-    <extension class="LauLamanApps\PhpunitDebugCodeDetector\PhpunitDebugCodeDetectorExtension">
+    <extension class="LauLamanApps\DebugCodeDetector\DebugCodeDetectorExtension">
         <arguments>
             <array><!-- Folders we want scanned -->
                 <element key="0"><string>src</string></element>

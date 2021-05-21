@@ -1,8 +1,8 @@
 <?php
 
-namespace LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper;
+namespace LauLamanApps\DebugCodeDetector\Detector\Symfony\VarDumper;
 
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\AbstractDetector;
+use LauLamanApps\DebugCodeDetector\Detector\AbstractDetector;
 
 class DieDumpDetector extends AbstractDetector
 {

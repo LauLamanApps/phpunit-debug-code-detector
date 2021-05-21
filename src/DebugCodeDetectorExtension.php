@@ -1,16 +1,17 @@
 <?php
 
-namespace LauLamanApps\PhpunitDebugCodeDetector;
+namespace LauLamanApps\DebugCodeDetector;
 
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\AbstractDetector;
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\PrintRDetector;
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\VarDumpDetector;
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper\DieDumpDetector;
-use LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper\DumpDetector;
-use LauLamanApps\PhpunitDebugCodeDetector\Exception\DebugCodeDetectedException;
+use LauLamanApps\DebugCodeDetector\Detector\AbstractDetector;
+use LauLamanApps\DebugCodeDetector\Detector\Php\PrintRDetector;
+use LauLamanApps\DebugCodeDetector\Detector\Php\VarDumpDetector;
+use LauLamanApps\DebugCodeDetector\Detector\Symfony\VarDumper\DieDumpDetector;
+use LauLamanApps\DebugCodeDetector\Detector\Symfony\VarDumper\DumpDetector;
+use LauLamanApps\DebugCodeDetector\Exception\DebugCodeDetectedException;
+use LogicException;
 use PHPUnit\Runner\AfterLastTestHook;
 
-class PhpunitDebugCodeDetectorExtension implements AfterLastTestHook
+class DebugCodeDetectorExtension implements AfterLastTestHook
 {
     private bool $colors;
     private string $projectPath;
@@ -45,9 +46,14 @@ class PhpunitDebugCodeDetectorExtension implements AfterLastTestHook
             return;
         }
 
-        foreach ($detectors as $detector) {
-            $this->detectors[] = new $detector();
+        if (count(array_filter($detectors, function ($detector) {
+                return !($detector instanceof AbstractDetector);
+            })) > 0) {
+
+            throw new LogicException('Unknown detector given. Please check the PHPUnit configuration. When using a CUSTOM detector make sure it implements AbstractDetector');
         }
+
+        $this->detectors = $detectors;
     }
 
     public function executeAfterLastTest(): void

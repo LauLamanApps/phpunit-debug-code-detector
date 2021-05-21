@@ -1,6 +1,6 @@
 <?php
 
-namespace LauLamanApps\PhpunitDebugCodeDetector\Detector;
+namespace LauLamanApps\DebugCodeDetector\Detector;
 
 abstract class AbstractDetector
 {

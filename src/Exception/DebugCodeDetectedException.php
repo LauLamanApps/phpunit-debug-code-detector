@@ -1,6 +1,6 @@
 <?php
 
-namespace LauLamanApps\PhpunitDebugCodeDetector\Exception;
+namespace LauLamanApps\DebugCodeDetector\Exception;
 
 use Exception;
 
