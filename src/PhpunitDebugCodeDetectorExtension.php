@@ -2,12 +2,12 @@
 
 namespace LauLamanApps\PhpunitDebugCodeDetector;
 
-use Exception;
 use LauLamanApps\PhpunitDebugCodeDetector\Detector\AbstractDetector;
 use LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\PrintRDetector;
 use LauLamanApps\PhpunitDebugCodeDetector\Detector\Php\VarDumpDetector;
 use LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper\DieDumpDetector;
 use LauLamanApps\PhpunitDebugCodeDetector\Detector\Symfony\VarDumper\DumpDetector;
+use LauLamanApps\PhpunitDebugCodeDetector\Exception\DebugCodeDetectedException;
 use PHPUnit\Runner\AfterLastTestHook;
 
 class PhpunitDebugCodeDetectorExtension implements AfterLastTestHook
@@ -23,13 +23,13 @@ class PhpunitDebugCodeDetectorExtension implements AfterLastTestHook
     public function __construct(
         array $foldersToScan,
         null|array|string $detectors = 'all',
+        ?bool $colors = null,
         ?string $projectPath = null,
-        ?bool $colors = null
     ) {
         $this->foldersToScan = $foldersToScan;
+        $this->configureDetectors($detectors);
         $this->colors = $colors ?? true;
         $this->projectPath = $projectPath?? getcwd();
-        $this->configureDetectors($detectors);
     }
 
     private function configureDetectors(array|string $detectors): void
@@ -57,7 +57,7 @@ class PhpunitDebugCodeDetectorExtension implements AfterLastTestHook
         }
 
         if ($this->debugCodeDetected) {
-            throw new Exception('Debug code was detected');
+            throw new DebugCodeDetectedException($this->colors);
         }
     }
 
