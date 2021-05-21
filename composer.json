@@ -1,0 +1,21 @@
+{
+    "name": "laulamanapps/phpunit-debug-code-detector",
+    "description": "Detect debug code in your project files",
+    "type": "phpunit-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LauLaman",
+            "email": "laurens.laman@llaman.nl"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LauLamanApps\\PhpunitDebugCodeDetector\\": "src/"
+        }
+    }
+}
